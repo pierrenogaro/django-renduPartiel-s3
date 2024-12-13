@@ -1,11 +1,110 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Partiel Documentation{% endblock %}</title>
 </head>
 <body>
-<p>coucou c'est un test</p>
+    {% block body %}
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 text-dark">🌟 Partiel Documentation 🌟</h1>
+            <p class="text-dark-50">A complete guide to using our API for registration, authentication, and product management.</p>
+        </div>
 
+        <div class="card mb-4 shadow-lg border-0">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4">📢 Introduction</h2>
+            </div>
+            <div class="card-body bg-light">
+                <p>Welcome to our API documentation! This API allows users to:</p>
+                <ul>
+                    <li>Register and authenticate using secure JWT tokens.</li>
+                    <li>Manage a collection of products with CRUD functionalities.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-lg border-0">
+            <div class="card-header bg-secondary text-white">
+                <h2 class="h4">🔐 User Registration</h2>
+            </div>
+            <div class="card-body bg-light">
+                <p><strong>POST /api/register</strong> - Create a new user account.</p>
+                <div class="bg-dark text-white p-3 rounded">
+                    <pre>
+Headers: Content-Type: application/json
+Body: {
+    "email": "user@example.com",
+    "password": "yourPassword"
+}
+                    </pre>
+                </div>
+                <p>Example Response:</p>
+                <div class="bg-dark text-white p-3 rounded">
+                    <pre>
+{
+    "id": 1,
+    "email": "user@example.com",
+    "roles": ["ROLE_USER"]
+}
+                    </pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authentication Section -->
+        <div class="card mb-4 shadow-lg border-0">
+            <div class="card-header bg-dark text-white">
+                <h2 class="h4">🔐 Authentication</h2>
+            </div>
+            <div class="card-body bg-light">
+                <p><strong>POST /api/login_check</strong> - Obtain a JWT token with valid credentials.</p>
+                <div class="bg-dark text-white p-3 rounded">
+                    <pre>
+Headers: Content-Type: application/json
+Body: {
+    "username": "user@example.com",
+    "password": "yourPassword"
+}
+                    </pre>
+                </div>
+                <p>Example Response:</p>
+                <div class="bg-dark text-white p-3 rounded">
+                    <pre>
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+                    </pre>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <strong>Note:</strong> Use the JWT token in the <code>Authorization</code> header for all protected routes:
+                    <pre>Authorization: Bearer &lt;token&gt;</pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 shadow-lg border-0">
+            <div class="card-header bg-success text-white">
+                <h2 class="h4">📦 Product Management</h2>
+            </div>
+            <div class="card-body bg-light">
+                <p>Manage products with the following endpoints:</p>
+                <ul>
+                    <li><strong>GET /products</strong> - Retrieve a list of all products.</li>
+                    <li><strong>GET /product/{id}</strong> - Retrieve details of a specific product by ID.</li>
+                    <li><strong>POST /api/product</strong> - Create a new product.</li>
+                    <li><strong>PUT /api/product/{id}</strong> - Update a product.</li>
+                    <li><strong>DELETE /api/product/{id}</strong> - Delete a product.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
 </body>
 </html>
